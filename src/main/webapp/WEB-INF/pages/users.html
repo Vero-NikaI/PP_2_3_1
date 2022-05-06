@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All users</title>
+</head>
+<body>
+<div th:switch="${users}">
+    <h2 th:case="null">No users</h2>
+    <div th:case="*">
+        <h2>Users</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Lastname</th>
+                <th>Age</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user, state : ${users}"
+                class="row" th:classappend="${state.odd} ? 'odd-row' : 'even-row'">
+                <td th:utext="${user.getId}">id</td>
+                <td th:utext="${user.getName}">Name</td>
+                <td th:utext="${user.getLastname}">Lastname</td>
+                <td th:utext="${user.getAge}">Age</td>
+                <td><a th:href="@{userUpdate/{id}(id = ${user.id})}">Edit</a></td>
+                <td><a th:href="@{userDelete/{id}(id = ${user.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    <p><a th:href="userCreate">Create user</a></p>
+</div>
+</body>
+</div>
+</html>
